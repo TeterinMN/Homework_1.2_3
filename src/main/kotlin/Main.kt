@@ -14,42 +14,28 @@
  */
 
 fun main() {
-    val itemPrise = 100
-    val itemCount = 301
-    val discountStart = 1001
-    val discountLarge = 10_000
-    var totalPrise = itemPrise * itemCount
+    val money = 11000
+    val musicLover = true
+    var totalPrice: Double
+    val discountMin = 100
+    val discountMax = 0.05
+    val discountMusicLover = 0.01
 
-    if (totalPrise in (discountStart + 1) until discountLarge) {
-        println(
-            "Стоимость одной композиции = 100 руб. \nМы покупаем $itemCount композиций на сумму $totalPrise руб. " +
-                    "и получаем скидку в 100 руб."
-        )
-        totalPrise -= 100
-        println("Итого: $totalPrise рублей")
-    } else if (totalPrise > discountLarge && itemCount < 300) {
-        val discount = (totalPrise * 5) / 100
-        println(
-            "Стоимость одной композиции = 100 руб. \nМы покупаем $itemCount композиций на сумму $totalPrise руб. " +
-                    "и получаем скидку в 5%"
-        )
-        totalPrise -= discount
-        println("Итого: $totalPrise рублей c учетом скидки в 5%")
-    } else if (itemCount >= 300) {
-        val discount = (totalPrise * 5) / 100
-        println(
-            "Стоимость одной композиции = 100 руб. \nМы покупаем $itemCount композиций на сумму $totalPrise руб. " +
-                    "и получаем скидку в 5%, а так же 1% как постоянному покупателю"
-        )
-        totalPrise -= discount
-        val discount2: Double = ((totalPrise * 1) / 100).toDouble()
-        val res: Double = totalPrise - discount2
-        println("Итого: $res рублей c учетом скидки в 5% и 1%")
+
+    println("Стоимость заказа: $money руб.")
+
+    if (money in 1001..10_000) {
+        totalPrice = money - discountMin.toDouble()
+        println("Стандартная скидка:  $discountMin руб.! -  $totalPrice руб.")
+    } else if (money > 10_000) {
+        totalPrice = money - (money * discountMax)
+        println("Увеличенная скидка 5%: $totalPrice руб.")
     } else {
-        println(
-            "Стоимость одной композиции = 100 руб. \nМы покупаем $itemCount композиций на сумму $totalPrise руб. " +
-                    "СКИДОК НЕТ"
-        )
+        totalPrice = money.toDouble()
+        println("Скидки нет: $money руб.")
     }
-
+    if (musicLover) {
+        totalPrice -= totalPrice * discountMusicLover
+        println("Меломану дополнительная скидка 1%: $totalPrice руб.")
+    }
 }
